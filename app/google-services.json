@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "35624289357",
+    "firebase_url": "https://asylumapp-c3714.firebaseio.com",
+    "project_id": "asylumapp-c3714",
+    "storage_bucket": "asylumapp-c3714.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35624289357:android:f4d3e4522e43a6fe",
+        "android_client_info": {
+          "package_name": "g.cblagden.asylumapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35624289357-3p6kfccgc41d2rh937r5oe5qi9qccesb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "g.cblagden.asylumapp",
+            "certificate_hash": "4fa11a62bbaf5bf09824619b5b05cdcbfd25c24a"
+          }
+        },
+        {
+          "client_id": "35624289357-5fjpono5rsem3ul7ctd1v9t32vavn17a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQoFHQw316LCn7vLbto1w2Ap6K3vVUpcs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35624289357-5fjpono5rsem3ul7ctd1v9t32vavn17a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
