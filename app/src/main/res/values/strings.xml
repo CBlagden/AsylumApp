@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AsylumApp</string>
+    <string name="app_name">Asylum</string>
     <string name="bottomnav_title_games">Games</string>
     <string name="bottomnav_title_twitter">Twitter</string>
     <string name="bottomnav_title_info">Info</string>
