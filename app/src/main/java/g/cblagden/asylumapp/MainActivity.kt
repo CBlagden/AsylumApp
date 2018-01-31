@@ -1,21 +1,17 @@
 package g.cblagden.asylumapp
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.webkit.WebViewClient
-import android.widget.Button
-import android.widget.TextView
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.google.firebase.database.*
 import com.google.firebase.messaging.FirebaseMessaging
+import com.unnamed.b.atv.model.TreeNode
+import com.unnamed.b.atv.view.AndroidTreeView
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -86,16 +82,16 @@ class MainActivity : AppCompatActivity() {
         gamesRef = database.getReference(Constants.games)
         gamesRef.addValueEventListener(object : ValueEventListener {
 
-            @RequiresApi(Build.VERSION_CODES.N)
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 gamesLinearLayout.removeAllViews()
+                val root = TreeNode.root()
                 for (game in dataSnapshot.children) {
                     val name = game.key
                     var location = ""
                     var latitude = 0.0
                     var longitude = 0.0
                     var inputDate = ""
-                    var score  = ""
+                    var score = ""
                     var theme = ""
                     var time = ""
                     for (data in game.children) {
@@ -111,42 +107,27 @@ class MainActivity : AppCompatActivity() {
                             Constants.time -> time = value.toString()
                         }
                     }
+                    val gameTreeItem = GameTreeItem(
+                            name,
+                            location,
+                            latitude,
+                            longitude,
+                            inputDate,
+                            theme,
+                            time,
+                            score)
 
-                    val newGameButton = Button(applicationContext)
-                    newGameButton.setAllCaps(true)
-                    newGameButton.text = "$name vs. Servite"
-                    newGameButton.setTextColor(Color.WHITE)
-                    newGameButton.gravity = Gravity.LEFT
-                    newGameButton.alpha = 0.8f
-                    newGameButton.textSize = 25f
-                    newGameButton.setBackgroundColor(Color.TRANSPARENT)
-                    newGameButton.setPadding(100, 50, 0, 0)
-                    newGameButton.setOnClickListener {
-                        val intent = Intent(applicationContext, GameActivity::class.java)
-                        intent.putExtra(Constants.name, name)
-                        intent.putExtra(Constants.location, location)
-                        intent.putExtra(Constants.latitude, latitude)
-                        intent.putExtra(Constants.longitude, longitude)
-                        intent.putExtra(Constants.date, inputDate)
-                        intent.putExtra(Constants.score, score)
-                        intent.putExtra(Constants.theme, theme)
-                        intent.putExtra(Constants.time, time)
-                        startActivity(intent)
-                    }
-
-                    val eventInfo = TextView(applicationContext)
-                    eventInfo.text = "$inputDate | $location"
-                    eventInfo.textSize = 16f
-                    eventInfo.setBackgroundColor(Color.TRANSPARENT)
-                    eventInfo.setTextColor(Color.WHITE)
-                    eventInfo.setPadding(100, 25, 0, 0)
-                    eventInfo.setAllCaps(true)
-                    eventInfo.gravity = Gravity.LEFT
-
-                    gamesLinearLayout.addView(newGameButton)
-                    gamesLinearLayout.addView(eventInfo)
+                    val treeNode = TreeNode(gameTreeItem).setViewHolder(GamesHolder(applicationContext))
+                    root.addChild(treeNode)
                 }
+                val treeView = AndroidTreeView(applicationContext, root)
+                root.setClickListener({
+                    node, value ->
+                    treeView.expandLevel(node.level)
+                })
+                gamesLinearLayout.addView(treeView.view)
             }
+
 
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.e("database error", databaseError.message)
