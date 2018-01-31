@@ -30,9 +30,8 @@ class GameInfoHolder(context: Context) : TreeNode.BaseNodeViewHolder<GameTreeIte
         val directionsButton = GameInfoTextView(context)
         directionsButton.text = "Directions"
         directionsButton.setOnClickListener {
-            val uri = "http://maps.google.com/maps?daddr=${value?.latitude},${value?.longitude}"
+            val uri = "https://www.google.com/maps/dir/?api=1&destination=${value?.latitude},${value?.longitude}"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-            intent.`package` = "com.google.android.apps.maps"
             context.startActivity(intent)
         }
         gameInfoLayout.addView(gameScore)
@@ -47,8 +46,8 @@ class GameInfoHolder(context: Context) : TreeNode.BaseNodeViewHolder<GameTreeIte
 
         init {
             setTextColor(Color.WHITE)
-            setPadding(140, 25, 0, 0)
-            textSize = 20f
+            setPadding(140, 12, 0, 0)
+            textSize = 27f
             setAllCaps(true)
         }
 

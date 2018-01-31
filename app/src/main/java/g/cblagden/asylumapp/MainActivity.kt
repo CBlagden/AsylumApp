@@ -2,6 +2,7 @@ package g.cblagden.asylumapp
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -120,7 +121,7 @@ class MainActivity : AppCompatActivity() {
                             time,
                             score)
 
-                    val treeNode = TreeNode(gameTreeItem).setViewHolder(GamesHolder(applicationContext))
+                    val treeNode = TreeNode(gameTreeItem).setViewHolder(GameHolder(applicationContext))
                     root.addChild(treeNode)
                 }
                 val treeView = AndroidTreeView(applicationContext, root)
@@ -133,31 +134,71 @@ class MainActivity : AppCompatActivity() {
 
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Log.e("database error", databaseError.message)
+                val errorMess = TextView(applicationContext)
+                errorMess.setPadding(100, 25, 0,0)
+                errorMess.textSize = 25f
+                errorMess.text = "Could not load games. Please connect to Internet."
+                errorMess.setTextColor(Color.WHITE)
+                gamesLinearLayout.addView(errorMess)
             }
 
         })
     }
 
     private fun loadInfoPage() {
+
+        val titleTextView = TextView(applicationContext)
+        titleTextView.textSize = 35f
+        titleTextView.setAllCaps(true)
+        titleTextView.setPadding(100, 25, 0, 0)
+        titleTextView.text = "info"
+        titleTextView.text
+        titleTextView.setTextColor(Color.WHITE)
+
+        val subTitleTextView = TextView(applicationContext)
+        subTitleTextView.text = "created by campus life"
+        subTitleTextView.textSize = 30f
+        subTitleTextView.setTextColor(Color.WHITE)
+        subTitleTextView.setAllCaps(true)
+        subTitleTextView.setPadding(100, 25, 0, 0)
+        subTitleTextView.setTypeface(subTitleTextView.typeface, Typeface.BOLD)
+
         val producedTextView = TextView(applicationContext)
-        producedTextView.text = "Programmed by: "
+        producedTextView.text = "Programmer"
         producedTextView.setPadding(100, 25, 0, 0)
-        producedTextView.textSize = 25f
+        producedTextView.textSize = 30f
+        producedTextView.setAllCaps(true)
+        producedTextView.setTypeface(producedTextView.typeface, Typeface.BOLD)
         producedTextView.setTextColor(Color.WHITE)
+
         val producerTextView = TextView(applicationContext)
         producerTextView.text = "Chase Blagden"
-        producerTextView.textSize = 20f
+        producerTextView.textSize = 30f
+        producerTextView.setAllCaps(true)
         producerTextView.setTextColor(Color.WHITE)
         producerTextView.setPadding(150, 25, 0, 0)
-        val phototographerTextView = TextView(applicationContext)
-        phototographerTextView.text = "Photos by Mr. Marrujo"
-        phototographerTextView.textSize = 25f
-        phototographerTextView.setTextColor(Color.WHITE)
-        phototographerTextView.setPadding(100, 25, 0,0 )
+
+        val photoTextView = TextView(applicationContext)
+        photoTextView.text = "Photos"
+        photoTextView.setTypeface(producedTextView.typeface, Typeface.BOLD)
+        photoTextView.textSize = 30f
+        photoTextView.setAllCaps(true)
+        photoTextView.setTextColor(Color.WHITE)
+        photoTextView.setPadding(100, 25, 0,0 )
+
+        val photoTakerTextView = TextView(applicationContext)
+        photoTakerTextView.textSize = 30f
+        photoTakerTextView.text = "mmsportsphoto"
+        photoTakerTextView.setAllCaps(true)
+        photoTakerTextView.setPadding(150, 25, 0, 0)
+        photoTakerTextView.setTextColor(Color.WHITE)
+
+        infoLinearLayout.addView(titleTextView)
+        infoLinearLayout.addView(subTitleTextView)
         infoLinearLayout.addView(producedTextView)
         infoLinearLayout.addView(producerTextView)
-        infoLinearLayout.addView(phototographerTextView)
+        infoLinearLayout.addView(photoTextView)
+        infoLinearLayout.addView(photoTakerTextView)
     }
 
     @SuppressLint("SetJavaScriptEnabled")
