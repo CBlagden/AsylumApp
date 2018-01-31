@@ -11,8 +11,6 @@ import com.unnamed.b.atv.model.TreeNode
  */
 class GamesHolder(context: Context) : TreeNode.BaseNodeViewHolder<GameTreeItem>(context) {
 
-
-
     override fun createNodeView(node: TreeNode?, value: GameTreeItem?): View {
         val gameInfo = TextView(context)
         gameInfo.setPadding(100, 25, 0,0)

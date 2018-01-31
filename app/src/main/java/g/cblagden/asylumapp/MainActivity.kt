@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.webkit.WebViewClient
+import android.widget.TextView
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.google.firebase.database.*
 import com.google.firebase.messaging.FirebaseMessaging
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                         2 -> {
                             reset()
                             coordinator.background = resources.getDrawable(R.drawable.info_background)
+                            infoLinearLayout.visibility = View.VISIBLE
                             true
                         }
                         else -> false
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         loadNavigationBar()
         loadGames()
         loadWebview()
+        loadInfoPage()
     }
 
     private fun loadNavigationBar() {
@@ -136,6 +139,27 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun loadInfoPage() {
+        val producedTextView = TextView(applicationContext)
+        producedTextView.text = "Programmed by: "
+        producedTextView.setPadding(100, 25, 0, 0)
+        producedTextView.textSize = 25f
+        producedTextView.setTextColor(Color.WHITE)
+        val producerTextView = TextView(applicationContext)
+        producerTextView.text = "Chase Blagden"
+        producerTextView.textSize = 20f
+        producerTextView.setTextColor(Color.WHITE)
+        producerTextView.setPadding(150, 25, 0, 0)
+        val phototographerTextView = TextView(applicationContext)
+        phototographerTextView.text = "Photos by Mr. Marrujo"
+        phototographerTextView.textSize = 25f
+        phototographerTextView.setTextColor(Color.WHITE)
+        phototographerTextView.setPadding(100, 25, 0,0 )
+        infoLinearLayout.addView(producedTextView)
+        infoLinearLayout.addView(producerTextView)
+        infoLinearLayout.addView(phototographerTextView)
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     private fun loadWebview() {
         webview.settings.javaScriptEnabled = true
@@ -148,6 +172,7 @@ class MainActivity : AppCompatActivity() {
         coordinator.background = resources.getDrawable(R.drawable.asylum_background)
         webview.visibility = View.GONE
         gamesLinearLayout.visibility = View.GONE
+        infoLinearLayout.visibility = View.GONE
     }
 
 }
